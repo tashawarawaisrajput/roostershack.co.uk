@@ -156,3 +156,18 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Globals.css ke aakhir mein ye add karein */
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg); /* 360 se shuru */
+  }
+  to {
+    transform: rotate(0deg);   /* 0 par khatam (is se direction ulti ho jayegi) */
+  }
+}
+
+.animate-spin-slow-reverse {
+  animation: spin-reverse 15s linear infinite; /* 10s ka matlab hai slow rotation */
+}

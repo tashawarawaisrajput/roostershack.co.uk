@@ -184,9 +184,7 @@ function CarouselPrevious({
       data-slot="carousel-previous"
       variant={variant}
       size={size}
-      // Maine yahan 'hidden' ko permanent add kar diya hai
-      className={cn(
-        'hidden', 
+      className={cn( 
         'absolute size-8 rounded-full',
         orientation === 'horizontal'
           ? 'top-1/2 -left-12 -translate-y-1/2'

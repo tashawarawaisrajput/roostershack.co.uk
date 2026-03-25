@@ -113,7 +113,7 @@ export function Header() {
               alt="Rooster Shack"
               width={80}
               height={80}
-              className="rounded-full"
+              className="rounded-full animate-spin-slow-reverse"
               priority
             />
           </Link>
