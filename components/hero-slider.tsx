@@ -74,7 +74,7 @@ export function HeroSlider() {
   const slide = slides[currentSlide]
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section className="relative min-h-[75vh] md:min-h-screen flex items-center overflow-hidden">
       {/* Background Images */}
       {slides.map((s, index) => (
         <div
