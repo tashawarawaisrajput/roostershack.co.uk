@@ -42,17 +42,33 @@ const branches: Branch[] = [
   {
     id: "aldershot",
     name: "Aldershot",
-    icon: <LocationIcon />,
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-10 h-10 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" strokeWidth="1.5">
+        {/* Tower/Observatory Icon */}
+        <path d="M12 2L9 7h6l-3-5zM9 7v15M15 7v15M6 22h12M9 12h6M9 17h6" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
   },
   {
     id: "farncombe",
     name: "Farncombe",
-    icon: <LocationIcon />,
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-10 h-10 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" strokeWidth="1.5">
+        {/* Boat/Water Icon */}
+        <path d="M2 17c5 0 5-2 10-2s5 2 10 2M3 17l2 4h14l2-4M12 15V3L8 7" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
   },
   {
     id: "woking",
     name: "Woking",
-    icon: <LocationIcon />,
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-10 h-10 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" strokeWidth="1.5">
+        {/* Modern Landmark/Tripod Icon */}
+        <path d="M12 3c-2 0-4 2-4 5 0 2 1 4 3 5l-3 8M12 13l3 8M12 3c2 0 4 2 4 5 0 2-1 4-3 5" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="12" cy="8" r="2" />
+      </svg>
+    ),
   },
 ]
 
