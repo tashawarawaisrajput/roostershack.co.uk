@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Instagram, Facebook } from "lucide-react"
+import { Instagram, Facebook,  } from "lucide-react"
 
 const ORDER_URL = "https://roostershack.touchtakeaway.net/menu"
 
@@ -107,6 +107,21 @@ export function Footer() {
               >
                 <Facebook className="w-5 h-5" />
               </a>
+              <a
+  href="https://www.tiktok.com/@roostershack"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+  aria-label="TikTok"
+>
+  <svg
+    viewBox="0 0 24 24"
+    className="w-5 h-5 fill-current"
+    style={{ display: 'block', margin: 'auto' }}
+  >
+    <path d="M12.525.02c1.312 0 2.61.01 3.91.01.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.11-2.89-.68-3.98-1.72-.01 3.5-.01 7-.01 10.5-.11 1.78-.6 3.6-1.8 4.96-1.2 1.36-2.9 2.19-4.7 2.45-1.75.26-3.6-.1-5.1-.96-1.5-.86-2.7-2.3-3.2-3.9-.5-1.6-.3-3.3.4-4.8.7-1.5 2-2.7 3.5-3.3v4.1c-.6.3-1.2.7-1.6 1.3-.4.6-.5 1.3-.4 2 .1.7.4 1.4.9 1.9.5.5 1.1.9 1.8 1 .7.1 1.4.1 2.1-.2.7-.3 1.2-.7 1.6-1.3.4-.6.5-1.3.4-2.1.01-4.72.01-9.44.01-14.16z" />
+  </svg>
+</a>
             </div>
             
             <div className="mt-6">
