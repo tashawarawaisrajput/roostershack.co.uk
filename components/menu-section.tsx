@@ -56,7 +56,7 @@ const menuCategories: MenuCategory[] = [
     icon: <Drumstick className="w-5 h-5" />,
     bannerImage: "/images/hero-burger.jpg",
     items: [
-      { id: 301, name: "The Classic Rooster", description: "Chicken fillet, lettuce & mayo.", image: "/images/classic-burger.jpg", orderUrl: `${BASE_URL}#item-301` },
+      { id: 301, name: "Double Cheese Burger", description: "Chicken fillet, lettuce & mayo.", image: "/images/double-cheese-burger.jpg", orderUrl: `${BASE_URL}#item-301` },
       { id: 302, name: "Chicken Fillet Tower", description: "Chicken fillet, hash brown & cheese.", image: "/images/hero-burger.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-302` },
       { id: 303, name: "The Smash Burger", description: "Double beef patty, double cheese & piri mayo.", image: "/images/hero-burger.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-303` },
       { id: 304, name: "The Shack Burger", description: "100% Beef patty with shack sauce.", image: "/images/classic-burger.jpg", orderUrl: `${BASE_URL}#item-304` },
@@ -124,15 +124,28 @@ const menuCategories: MenuCategory[] = [
     ],
   },
   {
-    id: "fried-wings-strips",
-    title: "Wings & Strips (Fried)",
-    subtitle: "Crispy & Spicy Fried Chicken",
-    icon: <Flame className="w-5 h-5" />,
-    bannerImage: "/images/wings.jpg",
-    items: [
-      { id: 1001, name: "6 Spicy Fried Wings", description: "Golden fried spicy wings.", image: "/images/wings.jpg", orderUrl: `${BASE_URL}#item-1001` },
-    ],
-  },
+  id: "fried-wings-strips",
+  title: "Wings & Strips (Fried)",
+  subtitle: "Crispy & Spicy Fried Chicken",
+  icon: <Flame className="w-5 h-5" />,
+  bannerImage: "/images/wings-2.jpg",
+  items: [
+    { 
+      id: 1001, 
+      name: "6 Spicy Fried Wings", 
+      description: "Golden fried spicy wings.", 
+      image: "/images/wings-1.jpg", 
+      orderUrl: `${BASE_URL}#item-1001` 
+    }, // <-- Yahan comma lagayein
+    { 
+      id: 1002, 
+      name: "10 Spicy Fried Wings", // Name change karein 
+      description: "Larger portion of golden fried spicy wings.", 
+      image: "/images/wings-2.jpg", 
+      orderUrl: `${BASE_URL}#item-1002` 
+    } // Dusra item yahan khatam hua
+  ] // Items ka main bracket yahan band hua
+},
   {
     id: "sides",
     title: "Sides",
