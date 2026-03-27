@@ -58,7 +58,7 @@ const menuCategories: MenuCategory[] = [
     items: [
       { id: 301, name: "Double Cheese Burger", description: "Chicken fillet, lettuce & mayo.", image: "/images/double-cheese-burger.jpg", orderUrl: `${BASE_URL}#item-301` },
       { id: 302, name: "Chicken Fillet Tower", description: "Chicken fillet, hash brown & cheese.", image: "/images/hero-burger.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-302` },
-      { id: 303, name: "The Smash Burger", description: "Double beef patty, double cheese & piri mayo.", image: "/images/hero-burger.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-303` },
+      { id: 303, name: "The Smash Burger", description: "Double beef patty, double cheese & piri mayo.", image: "/images/shacks-smash-burger.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-303` },
       { id: 304, name: "The Shack Burger", description: "100% Beef patty with shack sauce.", image: "/images/classic-burger.jpg", orderUrl: `${BASE_URL}#item-304` },
       { id: 305, name: "The Punjabi Burger", description: "Flame grilled with Inferno hot chilli sauce.", image: "/images/spicy-burger.jpg", orderUrl: `${BASE_URL}#item-305` },
     ],
@@ -70,7 +70,7 @@ const menuCategories: MenuCategory[] = [
     icon: <Sandwich className="w-5 h-5" />,
     bannerImage: "/images/hero-piri-piri.jpg",
     items: [
-      { id: 401, name: "Piri Chicken Wrap", description: "Grilled chicken with salad & mayo.", image: "/images/hero-piri-piri.jpg", orderUrl: `${BASE_URL}#item-401` },
+      { id: 401, name: "Piri Chicken Wrap", description: "Grilled chicken with salad & mayo.", image: "/images/wraps.jpg", orderUrl: `${BASE_URL}#item-401` },
     ],
   },
   {
@@ -174,7 +174,7 @@ const menuCategories: MenuCategory[] = [
     icon: <Soup className="w-5 h-5" />,
     bannerImage: "/images/deal-combo.jpg",
     items: [
-      { id: 1301, name: "Piri Mayo Dip", description: "Creamy piri mayo.", image: "/images/deal-combo.jpg", orderUrl: `${BASE_URL}#item-1301` },
+      { id: 1301, name: "Piri Mayo Dip", description: "Creamy piri mayo.", image: "/images/sauces.jpg", orderUrl: `${BASE_URL}#item-1301` },
     ],
   },
   {
