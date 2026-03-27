@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Flame, Drumstick, IceCream, Percent, Pizza, Soup, Coffee, Utensils, Sandwich, Star, ChevronRight } from "lucide-react"
+import { Flame, Drumstick, IceCream, Percent, Pizza, Soup, Coffee, Utensils, Sandwich, Star, ChevronRight, ChevronLeft, Search } from "lucide-react"
 import Image from "next/image"
 
 const BASE_URL = "https://roostershack.touchtakeaway.net/menu"
@@ -190,35 +190,26 @@ const menuCategories: MenuCategory[] = [
 
 export function MenuSection() {
   const [activeCategory, setActiveCategory] = useState(menuCategories[0])
+  const [viewMode, setViewMode] = useState<"categories" | "products">("categories")
+
+  const handleCategorySelect = (category: MenuCategory) => {
+    setActiveCategory(category)
+    setViewMode("products")
+    // Mobile par product view par jaate waqt top par scroll ho jaye
+    if (window.innerWidth < 768) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
 
   return (
     <section id="menu" className="bg-[#FDF8F1] min-h-screen">
       
-      {/* MOBILE HORIZONTAL NAV (Only visible on small screens) */}
-      <div className="md:hidden sticky top-[64px] z-30 bg-white border-b border-slate-200 shadow-sm">
-        <div className="flex overflow-x-auto py-3 px-4 gap-4 no-scrollbar items-center">
-          {menuCategories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setActiveCategory(category)}
-              className={`whitespace-nowrap px-4 py-2 rounded-full font-bold uppercase text-[10px] transition-all ${
-                activeCategory.id === category.id 
-                ? "bg-primary text-white shadow-md" 
-                : "text-slate-500 bg-slate-100"
-              }`}
-            >
-              {category.title}
-            </button>
-          ))}
-        </div>
-      </div>
-
       <div className="flex flex-col md:flex-row max-w-[1440px] mx-auto">
         
-        {/* DESKTOP SIDEBAR (Hidden on Mobile) */}
+        {/* --- DESKTOP SIDEBAR --- */}
         <aside className="hidden md:block w-72 lg:w-80 bg-white border-r border-slate-200 sticky top-20 h-[calc(100vh-80px)] overflow-y-auto z-20">
           <div className="p-6">
-            <h2 className="text-xl font-black uppercase text-foreground mb-6 tracking-tight">Menu Categories</h2>
+            <h2 className="text-xl font-black uppercase text-foreground mb-6">Categories</h2>
             <nav className="space-y-1">
               {menuCategories.map((category) => (
                 <button
@@ -231,9 +222,7 @@ export function MenuSection() {
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className={activeCategory.id === category.id ? "text-white" : "text-primary"}>
-                      {category.icon}
-                    </span>
+                    {category.icon}
                     {category.title}
                   </div>
                   {activeCategory.id === category.id && <ChevronRight className="w-4 h-4" />}
@@ -243,55 +232,115 @@ export function MenuSection() {
           </div>
         </aside>
 
-        {/* MAIN CONTENT AREA */}
-        <main className="flex-1 p-4 md:p-10">
+        {/* --- MOBILE VIEW --- */}
+        <div className="md:hidden w-full">
+          
+          {/* SEARCH BAR (Always Visible) */}
+          <div className="p-4 bg-white sticky top-[64px] z-30 border-b border-slate-100 shadow-sm">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <input 
+                type="text" 
+                placeholder="Search items..." 
+                className="w-full bg-slate-50 rounded-full py-3 pl-10 pr-4 text-xs font-bold border-none focus:ring-1 focus:ring-primary outline-none"
+              />
+            </div>
+          </div>
+
+          {/* MODE 1: Category Selection Grid */}
+          {viewMode === "categories" && (
+            <div className="p-4 grid grid-cols-2 gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              {menuCategories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => handleCategorySelect(category)}
+                  className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden group flex flex-col"
+                >
+                  <div className="relative aspect-square w-full">
+                    <Image src={category.bannerImage} fill className="object-cover" alt={category.title} />
+                  </div>
+                  <div className="p-3 bg-white text-center">
+                    <span className="text-[10px] font-black uppercase tracking-tight text-foreground">{category.title}</span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* MODE 2: Horizontal Scroll + Products */}
+          {viewMode === "products" && (
+            <div className="animate-in fade-in slide-in-from-right-4 duration-500">
+              <div className="sticky top-[136px] z-30 bg-white border-b border-slate-200 shadow-sm flex items-center px-2">
+                <button 
+                  onClick={() => setViewMode("categories")} 
+                  className="p-3 text-primary"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <div className="flex overflow-x-auto py-3 gap-3 no-scrollbar items-center flex-1">
+                  {menuCategories.map((category) => (
+                    <button
+                      key={category.id}
+                      onClick={() => setActiveCategory(category)}
+                      className={`whitespace-nowrap px-4 py-2 rounded-full font-bold uppercase text-[10px] transition-all ${
+                        activeCategory.id === category.id 
+                        ? "bg-primary text-white" 
+                        : "text-slate-500 bg-slate-100"
+                      }`}
+                    >
+                      {category.title}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Product Content for Mobile */}
+              <div className="p-4 space-y-6">
+                 {activeCategory.items.map((item) => (
+                    <div key={item.id} className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col overflow-hidden">
+                       <div className="relative aspect-video w-full">
+                         <Image src={item.image} fill className="object-cover" alt={item.name} />
+                       </div>
+                       <div className="p-4">
+                         <h4 className="text-lg font-black uppercase text-foreground mb-1">{item.name}</h4>
+                         <p className="text-muted-foreground text-xs mb-4">{item.description}</p>
+                         <Button asChild className="w-full bg-accent hover:bg-primary text-white font-bold uppercase rounded-xl py-6">
+                            <a href={item.orderUrl} target="_blank" rel="noopener noreferrer">Order Now</a>
+                         </Button>
+                       </div>
+                    </div>
+                 ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* --- DESKTOP CONTENT AREA --- */}
+        <main className="hidden md:block flex-1 p-4 md:p-10">
           <div className="max-w-5xl mx-auto">
-            
-            {/* Active Category Header Banner */}
+            {/* Banner aur Products wahi rahenge */}
             <div className="relative overflow-hidden bg-primary rounded-2xl p-8 md:p-12 mb-10 flex items-center gap-4 min-h-[140px]">
               <div className="absolute inset-0 z-0">
-                <Image src={activeCategory.bannerImage} fill className="object-cover opacity-40" alt={activeCategory.title} priority />
+                <Image src={activeCategory.bannerImage} fill className="object-cover opacity-40" alt={activeCategory.title} />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent" />
               </div>
               <div className="relative z-10">
-                <h3 className="text-3xl md:text-5xl font-black uppercase text-white drop-shadow-md">{activeCategory.title}</h3>
-                <p className="text-white/90 font-bold uppercase text-sm md:text-lg tracking-wide">{activeCategory.subtitle}</p>
+                <h3 className="text-3xl md:text-5xl font-black uppercase text-white">{activeCategory.title}</h3>
+                <p className="text-white/90 font-bold uppercase text-sm md:text-lg">{activeCategory.subtitle}</p>
               </div>
             </div>
 
-            {/* Products Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {activeCategory.items.map((item) => (
-                <div 
-                  key={item.id} 
-                  className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full overflow-hidden border border-slate-100 group"
-                >
-                  <div className="relative aspect-[4/3] w-full overflow-hidden">
-                    <Image 
-                      src={item.image} 
-                      alt={item.name} 
-                      fill 
-                      className="object-cover transition-transform duration-500 group-hover:scale-110" 
-                    />
-                    {item.isPopular && (
-                      <div className="absolute top-4 left-4 bg-primary text-white font-black uppercase text-[10px] px-3 py-1 rounded-full z-10 shadow-lg">
-                        Popular
-                      </div>
-                    )}
+                <div key={item.id} className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 flex flex-col overflow-hidden">
+                  <div className="relative aspect-[4/3] w-full">
+                    <Image src={item.image} fill className="object-cover" alt={item.name} />
                   </div>
-
                   <div className="p-6 flex flex-col flex-grow text-center">
-                    <h4 className="text-lg font-black uppercase text-foreground mb-2 flex-grow flex items-center justify-center">
-                      {item.name}
-                    </h4>
-                    <p className="text-muted-foreground text-xs md:text-sm mb-6 line-clamp-2">
-                      {item.description}
-                    </p>
-                    
-                    <Button asChild className="w-full bg-accent hover:bg-primary text-white font-bold uppercase rounded-xl py-6 transition-colors">
-                      <a href={item.orderUrl} target="_blank" rel="noopener noreferrer">
-                        Order Now
-                      </a>
+                    <h4 className="text-lg font-black uppercase text-foreground mb-2 flex-grow flex items-center justify-center">{item.name}</h4>
+                    <p className="text-muted-foreground text-xs mb-6">{item.description}</p>
+                    <Button asChild className="w-full bg-accent hover:bg-primary text-white font-bold uppercase rounded-xl py-6 mt-auto">
+                      <a href={item.orderUrl} target="_blank" rel="noopener noreferrer">Order Now</a>
                     </Button>
                   </div>
                 </div>
@@ -299,6 +348,7 @@ export function MenuSection() {
             </div>
           </div>
         </main>
+
       </div>
     </section>
   )
