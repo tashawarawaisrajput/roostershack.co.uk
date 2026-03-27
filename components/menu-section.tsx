@@ -45,7 +45,7 @@ const menuCategories: MenuCategory[] = [
     bannerImage: "/images/hero-piri-piri.jpg",
     items: [
       { id: 201, name: "Quarter Piri Piri Chicken", description: "Grilled quarter chicken with signature spices.", image: "/images/hero-piri-piri.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-201` },
-      { id: 202, name: "Half Piri Piri Chicken", description: "Succulent half chicken grilled to order.", image: "/images/hero-piri-piri.jpg", orderUrl: `${BASE_URL}#item-202` },
+      { id: 202, name: "Half Piri Piri Chicken", description: "Succulent half chicken grilled to order.", image: "/images/hero-piri-piri.jpg", orderUrl: `${BASE_URL}#item-201` },
       { id: 203, name: "Whole Piri Piri Chicken", description: "Full chicken marinated for 24 hours.", image: "/images/hero-piri-piri.jpg", orderUrl: `${BASE_URL}#item-203` },
     ],
   },
@@ -191,22 +191,31 @@ const menuCategories: MenuCategory[] = [
 export function MenuSection() {
   const [activeCategory, setActiveCategory] = useState(menuCategories[0])
   const [viewMode, setViewMode] = useState<"categories" | "products">("categories")
+  const [searchQuery, setSearchQuery] = useState("")
+
+  // Live Search Logic: Search through all categories
+  const filteredItems = searchQuery.trim() === "" 
+    ? activeCategory.items 
+    : menuCategories.flatMap(cat => cat.items).filter(item => 
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchQuery.toLowerCase())
+      )
 
   const handleCategorySelect = (category: MenuCategory) => {
     setActiveCategory(category)
     setViewMode("products")
-    // Mobile par product view par jaate waqt top par scroll ho jaye
+    setSearchQuery("") // Reset search when picking a category
     if (window.innerWidth < 768) {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
 
   return (
-    <section id="menu" className="bg-[#FDF8F1] min-h-screen">
+    <section id="menu" className="bg-[#FDF8F1] min-h-screen pb-10">
       
       <div className="flex flex-col md:flex-row max-w-[1440px] mx-auto">
         
-        {/* --- DESKTOP SIDEBAR --- */}
+        {/* --- DESKTOP SIDEBAR (Permanent) --- */}
         <aside className="hidden md:block w-72 lg:w-80 bg-white border-r border-slate-200 sticky top-20 h-[calc(100vh-80px)] overflow-y-auto z-20">
           <div className="p-6">
             <h2 className="text-xl font-black uppercase text-foreground mb-6">Categories</h2>
@@ -214,9 +223,12 @@ export function MenuSection() {
               {menuCategories.map((category) => (
                 <button
                   key={category.id}
-                  onClick={() => setActiveCategory(category)}
+                  onClick={() => {
+                    setActiveCategory(category)
+                    setSearchQuery("") // Clear search on category click
+                  }}
                   className={`w-full flex items-center justify-between px-4 py-4 rounded-xl transition-all font-bold uppercase text-xs tracking-wider ${
-                    activeCategory.id === category.id 
+                    activeCategory.id === category.id && searchQuery === "" 
                     ? "bg-primary text-white shadow-lg translate-x-1" 
                     : "text-slate-500 hover:bg-slate-100"
                   }`}
@@ -225,41 +237,46 @@ export function MenuSection() {
                     {category.icon}
                     {category.title}
                   </div>
-                  {activeCategory.id === category.id && <ChevronRight className="w-4 h-4" />}
+                  {activeCategory.id === category.id && searchQuery === "" && <ChevronRight className="w-4 h-4" />}
                 </button>
               ))}
             </nav>
           </div>
         </aside>
 
-        {/* --- MOBILE VIEW --- */}
+        {/* --- MOBILE CONTENT AREA --- */}
         <div className="md:hidden w-full">
           
-          {/* SEARCH BAR (Always Visible) */}
+          {/* SEARCH BAR (Sticky on Mobile) */}
           <div className="p-4 bg-white sticky top-[64px] z-30 border-b border-slate-100 shadow-sm">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input 
                 type="text" 
                 placeholder="Search items..." 
+                value={searchQuery}
+                onChange={(e) => {
+                    setSearchQuery(e.target.value)
+                    if (e.target.value !== "") setViewMode("products")
+                }}
                 className="w-full bg-slate-50 rounded-full py-3 pl-10 pr-4 text-xs font-bold border-none focus:ring-1 focus:ring-primary outline-none"
               />
             </div>
           </div>
 
-          {/* MODE 1: Category Selection Grid */}
-          {viewMode === "categories" && (
-            <div className="p-4 grid grid-cols-2 gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          {/* MODE 1: Categories Grid */}
+          {viewMode === "categories" && searchQuery === "" && (
+            <div className="p-4 grid grid-cols-2 gap-4">
               {menuCategories.map((category) => (
                 <button
                   key={category.id}
                   onClick={() => handleCategorySelect(category)}
-                  className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden group flex flex-col"
+                  className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden"
                 >
                   <div className="relative aspect-square w-full">
                     <Image src={category.bannerImage} fill className="object-cover" alt={category.title} />
                   </div>
-                  <div className="p-3 bg-white text-center">
+                  <div className="p-3 text-center">
                     <span className="text-[10px] font-black uppercase tracking-tight text-foreground">{category.title}</span>
                   </div>
                 </button>
@@ -267,49 +284,56 @@ export function MenuSection() {
             </div>
           )}
 
-          {/* MODE 2: Horizontal Scroll + Products */}
-          {viewMode === "products" && (
-            <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-              <div className="sticky top-[136px] z-30 bg-white border-b border-slate-200 shadow-sm flex items-center px-2">
-                <button 
-                  onClick={() => setViewMode("categories")} 
-                  className="p-3 text-primary"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <div className="flex overflow-x-auto py-3 gap-3 no-scrollbar items-center flex-1">
-                  {menuCategories.map((category) => (
-                    <button
-                      key={category.id}
-                      onClick={() => setActiveCategory(category)}
-                      className={`whitespace-nowrap px-4 py-2 rounded-full font-bold uppercase text-[10px] transition-all ${
-                        activeCategory.id === category.id 
-                        ? "bg-primary text-white" 
-                        : "text-slate-500 bg-slate-100"
-                      }`}
-                    >
-                      {category.title}
-                    </button>
-                  ))}
+          {/* MODE 2: Products View */}
+          {(viewMode === "products" || searchQuery !== "") && (
+            <div>
+              {/* Back Button & Horizontal Menu (Only if not searching) */}
+              {searchQuery === "" && (
+                <div className="sticky top-[136px] z-30 bg-white border-b border-slate-200 shadow-sm flex items-center px-2">
+                  <button onClick={() => setViewMode("categories")} className="p-3 text-primary">
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <div className="flex overflow-x-auto py-3 gap-3 no-scrollbar items-center flex-1">
+                    {menuCategories.map((category) => (
+                      <button
+                        key={category.id}
+                        onClick={() => setActiveCategory(category)}
+                        className={`whitespace-nowrap px-4 py-2 rounded-full font-bold uppercase text-[10px] transition-all ${
+                          activeCategory.id === category.id 
+                          ? "bg-primary text-white" 
+                          : "text-slate-500 bg-slate-100"
+                        }`}
+                      >
+                        {category.title}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
-              {/* Product Content for Mobile */}
+              {/* Products List Mobile */}
               <div className="p-4 space-y-6">
-                 {activeCategory.items.map((item) => (
-                    <div key={item.id} className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col overflow-hidden">
-                       <div className="relative aspect-video w-full">
-                         <Image src={item.image} fill className="object-cover" alt={item.name} />
-                       </div>
-                       <div className="p-4">
-                         <h4 className="text-lg font-black uppercase text-foreground mb-1">{item.name}</h4>
-                         <p className="text-muted-foreground text-xs mb-4">{item.description}</p>
-                         <Button asChild className="w-full bg-accent hover:bg-primary text-white font-bold uppercase rounded-xl py-6">
-                            <a href={item.orderUrl} target="_blank" rel="noopener noreferrer">Order Now</a>
-                         </Button>
-                       </div>
-                    </div>
-                 ))}
+                 {searchQuery !== "" && (
+                    <p className="text-xs font-bold uppercase text-slate-400 mb-2">Search Results for: {searchQuery}</p>
+                 )}
+                 {filteredItems.length > 0 ? (
+                    filteredItems.map((item) => (
+                        <div key={item.id} className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col overflow-hidden">
+                           <div className="relative aspect-video w-full">
+                             <Image src={item.image} fill className="object-cover" alt={item.name} />
+                           </div>
+                           <div className="p-4">
+                             <h4 className="text-lg font-black uppercase text-foreground mb-1">{item.name}</h4>
+                             <p className="text-muted-foreground text-xs mb-4">{item.description}</p>
+                             <Button asChild className="w-full bg-accent hover:bg-primary text-white font-bold uppercase rounded-xl py-6">
+                                <a href={item.orderUrl} target="_blank" rel="noopener noreferrer">Order Now</a>
+                             </Button>
+                           </div>
+                        </div>
+                    ))
+                 ) : (
+                    <div className="text-center py-20 text-slate-400 text-sm font-bold">No items found.</div>
+                 )}
               </div>
             </div>
           )}
@@ -318,37 +342,55 @@ export function MenuSection() {
         {/* --- DESKTOP CONTENT AREA --- */}
         <main className="hidden md:block flex-1 p-4 md:p-10">
           <div className="max-w-5xl mx-auto">
-            {/* Banner aur Products wahi rahenge */}
-            <div className="relative overflow-hidden bg-primary rounded-2xl p-8 md:p-12 mb-10 flex items-center gap-4 min-h-[140px]">
-              <div className="absolute inset-0 z-0">
-                <Image src={activeCategory.bannerImage} fill className="object-cover opacity-40" alt={activeCategory.title} />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent" />
-              </div>
-              <div className="relative z-10">
-                <h3 className="text-3xl md:text-5xl font-black uppercase text-white">{activeCategory.title}</h3>
-                <p className="text-white/90 font-bold uppercase text-sm md:text-lg">{activeCategory.subtitle}</p>
-              </div>
+            {/* Desktop Search */}
+            <div className="mb-8 relative max-w-md ml-auto">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <input 
+                    type="text" 
+                    placeholder="Search menu..." 
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full bg-white border border-slate-200 rounded-full py-3 pl-10 pr-4 text-xs font-bold outline-none focus:ring-2 focus:ring-primary/20"
+                />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {activeCategory.items.map((item) => (
-                <div key={item.id} className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 flex flex-col overflow-hidden">
-                  <div className="relative aspect-[4/3] w-full">
-                    <Image src={item.image} fill className="object-cover" alt={item.name} />
-                  </div>
-                  <div className="p-6 flex flex-col flex-grow text-center">
-                    <h4 className="text-lg font-black uppercase text-foreground mb-2 flex-grow flex items-center justify-center">{item.name}</h4>
-                    <p className="text-muted-foreground text-xs mb-6">{item.description}</p>
-                    <Button asChild className="w-full bg-accent hover:bg-primary text-white font-bold uppercase rounded-xl py-6 mt-auto">
-                      <a href={item.orderUrl} target="_blank" rel="noopener noreferrer">Order Now</a>
-                    </Button>
-                  </div>
+            {/* Banner (Only if not searching) */}
+            {searchQuery === "" && (
+                <div className="relative overflow-hidden bg-primary rounded-2xl p-8 md:p-12 mb-10 flex items-center min-h-[140px]">
+                    <div className="absolute inset-0 z-0">
+                        <Image src={activeCategory.bannerImage} fill className="object-cover opacity-40" alt={activeCategory.title} />
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent" />
+                    </div>
+                    <div className="relative z-10">
+                        <h3 className="text-3xl md:text-5xl font-black uppercase text-white">{activeCategory.title}</h3>
+                        <p className="text-white/90 font-bold uppercase text-sm tracking-wide">{activeCategory.subtitle}</p>
+                    </div>
                 </div>
-              ))}
+            )}
+
+            {/* Desktop Product Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredItems.length > 0 ? (
+                filteredItems.map((item) => (
+                    <div key={item.id} className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 flex flex-col overflow-hidden group">
+                      <div className="relative aspect-[4/3] w-full">
+                        <Image src={item.image} fill className="object-cover group-hover:scale-105 transition-all duration-500" alt={item.name} />
+                      </div>
+                      <div className="p-6 flex flex-col flex-grow text-center">
+                        <h4 className="text-lg font-black uppercase text-foreground mb-2 flex-grow flex items-center justify-center">{item.name}</h4>
+                        <p className="text-muted-foreground text-xs mb-6 line-clamp-2">{item.description}</p>
+                        <Button asChild className="w-full bg-accent hover:bg-primary text-white font-bold uppercase rounded-xl py-6 mt-auto">
+                          <a href={item.orderUrl} target="_blank" rel="noopener noreferrer">Order Now</a>
+                        </Button>
+                      </div>
+                    </div>
+                ))
+              ) : (
+                <div className="col-span-full text-center py-20 text-slate-400">No items matching your search.</div>
+              )}
             </div>
           </div>
         </main>
-
       </div>
     </section>
   )
