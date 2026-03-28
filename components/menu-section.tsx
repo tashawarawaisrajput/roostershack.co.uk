@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Flame, Drumstick, IceCream, Percent, Pizza, Soup, Coffee, Utensils, Sandwich, Star, ChevronRight, ChevronLeft, Search } from "lucide-react"
+import { ChevronRight, ChevronLeft, Search } from "lucide-react"
 import Image from "next/image"
 
 const BASE_URL = "https://roostershack.touchtakeaway.net/menu"
@@ -20,7 +20,6 @@ interface MenuCategory {
   id: string
   title: string
   subtitle: string
-  icon: React.ReactNode
   bannerImage: string
   items: MenuItem[]
 }
@@ -30,7 +29,6 @@ const menuCategories: MenuCategory[] = [
     id: "meal-deals",
     title: "Meal Deals",
     subtitle: "Value Bundles & Family Feasts",
-    icon: <Percent className="w-5 h-5" />,
     bannerImage: "/images/deal-combo.jpg",
     items: [
       { id: 101, name: "Rooster Meal Deal", description: "Any Classic Burger, Regular Fries & Drink.", image: "/images/deal-combo.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-101` },
@@ -41,7 +39,6 @@ const menuCategories: MenuCategory[] = [
     id: "piri-piri",
     title: "Piri Piri Chicken",
     subtitle: "Flame Grilled to Perfection",
-    icon: <Flame className="w-5 h-5" />,
     bannerImage: "/images/hero-piri-piri.jpg",
     items: [
       { id: 201, name: "Quarter Piri Piri Chicken", description: "Grilled quarter chicken with signature spices.", image: "/images/hero-piri-piri.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-201` },
@@ -53,7 +50,6 @@ const menuCategories: MenuCategory[] = [
     id: "famous-burgers",
     title: "Famous Burgers",
     subtitle: "Chicken, Beef & Infusion Burgers",
-    icon: <Drumstick className="w-5 h-5" />,
     bannerImage: "/images/hero-burger.jpg",
     items: [
       { id: 301, name: "Double Cheese Burger", description: "Chicken fillet, lettuce & mayo.", image: "/images/double-cheese-burger.jpg", orderUrl: `${BASE_URL}#item-301` },
@@ -67,7 +63,6 @@ const menuCategories: MenuCategory[] = [
     id: "wraps",
     title: "Wraps",
     subtitle: "Toasted Tortilla Selection",
-    icon: <Sandwich className="w-5 h-5" />,
     bannerImage: "/images/hero-piri-piri.jpg",
     items: [
       { id: 401, name: "Piri Chicken Wrap", description: "Grilled chicken with salad & mayo.", image: "/images/wraps.jpg", orderUrl: `${BASE_URL}#item-401` },
@@ -77,7 +72,6 @@ const menuCategories: MenuCategory[] = [
     id: "pitta",
     title: "Pitta",
     subtitle: "Freshly Toasted Pittas",
-    icon: <Utensils className="w-5 h-5" />,
     bannerImage: "/images/hero-piri-piri.jpg",
     items: [
       { id: 501, name: "Piri Chicken Pitta", description: "Grilled chicken in a soft pitta.", image: "/images/hero-piri-piri.jpg", orderUrl: `${BASE_URL}#item-501` },
@@ -87,7 +81,6 @@ const menuCategories: MenuCategory[] = [
     id: "quesadilla",
     title: "Quesadilla",
     subtitle: "Cheesy Grilled Tortillas",
-    icon: <Pizza className="w-5 h-5" />,
     bannerImage: "/images/hero-piri-piri.jpg",
     items: [
       { id: 601, name: "Shack Chicken Quesadilla", description: "Grilled chicken, cheese & salsa.", image: "/images/hero-piri-piri.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-601` },
@@ -97,7 +90,6 @@ const menuCategories: MenuCategory[] = [
     id: "rice-boxes",
     title: "Rice Boxes",
     subtitle: "Spicy Rice Meals",
-    icon: <Soup className="w-5 h-5" />,
     bannerImage: "/images/deal-combo.jpg",
     items: [
       { id: 701, name: "Piri Rice Box", description: "Grilled chicken on spicy rice.", image: "/images/deal-combo.jpg", orderUrl: `${BASE_URL}#item-701` },
@@ -107,7 +99,6 @@ const menuCategories: MenuCategory[] = [
     id: "salad-boxes",
     title: "Salad Boxes",
     subtitle: "Fresh & Healthy Greens",
-    icon: <Soup className="w-5 h-5" />,
     bannerImage: "/images/deal-combo.jpg",
     items: [
       { id: 801, name: "Garden Salad Box", description: "Healthy mixed salad with grilled chicken.", image: "/images/deal-combo.jpg", orderUrl: `${BASE_URL}#item-801` },
@@ -117,40 +108,25 @@ const menuCategories: MenuCategory[] = [
     id: "southern-fried",
     title: "Southern Fried Chicken",
     subtitle: "Classic Crispy Pieces",
-    icon: <Drumstick className="w-5 h-5" />,
     bannerImage: "/images/wings.jpg",
     items: [
       { id: 901, name: "2pc Chicken Piece", description: "Classic crispy fried chicken.", image: "/images/wings.jpg", orderUrl: `${BASE_URL}#item-901` },
     ],
   },
   {
-  id: "fried-wings-strips",
-  title: "Wings & Strips (Fried)",
-  subtitle: "Crispy & Spicy Fried Chicken",
-  icon: <Flame className="w-5 h-5" />,
-  bannerImage: "/images/wings-2.jpg",
-  items: [
-    { 
-      id: 1001, 
-      name: "6 Spicy Fried Wings", 
-      description: "Golden fried spicy wings.", 
-      image: "/images/wings-1.jpg", 
-      orderUrl: `${BASE_URL}#item-1001` 
-    }, // <-- Yahan comma lagayein
-    { 
-      id: 1002, 
-      name: "10 Spicy Fried Wings", // Name change karein 
-      description: "Larger portion of golden fried spicy wings.", 
-      image: "/images/wings-2.jpg", 
-      orderUrl: `${BASE_URL}#item-1002` 
-    } // Dusra item yahan khatam hua
-  ] // Items ka main bracket yahan band hua
-},
+    id: "fried-wings-strips",
+    title: "Wings & Strips (Fried)",
+    subtitle: "Crispy & Spicy Fried Chicken",
+    bannerImage: "/images/wings-2.jpg",
+    items: [
+      { id: 1001, name: "6 Spicy Fried Wings", description: "Golden fried spicy wings.", image: "/images/wings-1.jpg", orderUrl: `${BASE_URL}#item-1001` },
+      { id: 1002, name: "10 Spicy Fried Wings", description: "Larger portion of golden fried spicy wings.", image: "/images/wings-2.jpg", orderUrl: `${BASE_URL}#item-1002` }
+    ]
+  },
   {
     id: "sides",
     title: "Sides",
     subtitle: "Tasty Accompaniments",
-    icon: <Utensils className="w-5 h-5" />,
     bannerImage: "/images/deal-combo.jpg",
     items: [
       { id: 1101, name: "Regular Fries", description: "Salted potato fries.", image: "/images/deal-combo.jpg", orderUrl: `${BASE_URL}#item-1101` },
@@ -161,7 +137,6 @@ const menuCategories: MenuCategory[] = [
     id: "loaded-fries",
     title: "Loaded Fries",
     subtitle: "Topped with Indulgence",
-    icon: <Star className="w-5 h-5" />,
     bannerImage: "/images/hero-burger.jpg",
     items: [
       { id: 1201, name: "Chicken Loaded Fries", description: "Fries with cheese & grilled chicken.", image: "/images/hero-burger.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-1201` },
@@ -171,7 +146,6 @@ const menuCategories: MenuCategory[] = [
     id: "dips",
     title: "Dips",
     subtitle: "House Made Sauces",
-    icon: <Soup className="w-5 h-5" />,
     bannerImage: "/images/deal-combo.jpg",
     items: [
       { id: 1301, name: "Piri Mayo Dip", description: "Creamy piri mayo.", image: "/images/sauces.jpg", orderUrl: `${BASE_URL}#item-1301` },
@@ -181,7 +155,6 @@ const menuCategories: MenuCategory[] = [
     id: "awesome-shakes",
     title: "Awesome Shakes",
     subtitle: "Thick & Creamy Milkshakes",
-    icon: <IceCream className="w-5 h-5" />,
     bannerImage: "/images/shake.jpg",
     items: [
       { id: 1401, name: "Ferrero Rocher Shake", description: "Hazelnut chocolate shake.", image: "/images/shake.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-1401` },
@@ -192,7 +165,6 @@ const menuCategories: MenuCategory[] = [
     id: "drinks",
     title: "Drinks",
     subtitle: "Refreshing Beverages",
-    icon: <Coffee className="w-5 h-5" />,
     bannerImage: "/images/deal-combo.jpg",
     items: [
       { id: 1501, name: "Soft Drink Can", description: "330ml Chilled can.", image: "/images/deal-combo.jpg", orderUrl: `${BASE_URL}#item-1501` },
@@ -206,7 +178,6 @@ export function MenuSection() {
   const [viewMode, setViewMode] = useState<"categories" | "products">("categories")
   const [searchQuery, setSearchQuery] = useState("")
 
-  // Live Search Logic: Search through all categories
   const filteredItems = searchQuery.trim() === "" 
     ? activeCategory.items 
     : menuCategories.flatMap(cat => cat.items).filter(item => 
@@ -217,7 +188,7 @@ export function MenuSection() {
   const handleCategorySelect = (category: MenuCategory) => {
     setActiveCategory(category)
     setViewMode("products")
-    setSearchQuery("") // Reset search when picking a category
+    setSearchQuery("")
     if (window.innerWidth < 768) {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
@@ -225,10 +196,9 @@ export function MenuSection() {
 
   return (
     <section id="menu" className="bg-[#FDF8F1] min-h-screen pb-10">
-      
       <div className="flex flex-col md:flex-row max-w-[1440px] mx-auto">
         
-        {/* --- DESKTOP SIDEBAR (Permanent) --- */}
+        {/* --- DESKTOP SIDEBAR --- */}
         <aside className="hidden md:block w-72 lg:w-80 bg-white border-r border-slate-200 sticky top-20 h-[calc(100vh-80px)] overflow-y-auto z-20">
           <div className="p-6">
             <h2 className="text-xl font-black uppercase text-foreground mb-6">Categories</h2>
@@ -238,18 +208,15 @@ export function MenuSection() {
                   key={category.id}
                   onClick={() => {
                     setActiveCategory(category)
-                    setSearchQuery("") // Clear search on category click
+                    setSearchQuery("")
                   }}
-                  className={`w-full flex items-center justify-between px-4 py-4 rounded-xl transition-all font-bold uppercase text-xs tracking-wider ${
+                  className={`w-full flex items-center justify-between px-5 py-4 rounded-xl transition-all font-bold uppercase text-xs tracking-wider ${
                     activeCategory.id === category.id && searchQuery === "" 
                     ? "bg-primary text-white shadow-lg translate-x-1" 
                     : "text-slate-500 hover:bg-slate-100"
                   }`}
                 >
-                  <div className="flex items-center gap-3">
-                    {category.icon}
-                    {category.title}
-                  </div>
+                  <span>{category.title}</span>
                   {activeCategory.id === category.id && searchQuery === "" && <ChevronRight className="w-4 h-4" />}
                 </button>
               ))}
@@ -259,8 +226,6 @@ export function MenuSection() {
 
         {/* --- MOBILE CONTENT AREA --- */}
         <div className="md:hidden w-full">
-          
-          {/* SEARCH BAR (Sticky on Mobile) */}
           <div className="p-4 bg-white sticky top-[64px] z-30 border-b border-slate-100 shadow-sm">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -277,7 +242,6 @@ export function MenuSection() {
             </div>
           </div>
 
-          {/* MODE 1: Categories Grid */}
           {viewMode === "categories" && searchQuery === "" && (
             <div className="p-4 grid grid-cols-2 gap-4">
               {menuCategories.map((category) => (
@@ -297,10 +261,8 @@ export function MenuSection() {
             </div>
           )}
 
-          {/* MODE 2: Products View */}
           {(viewMode === "products" || searchQuery !== "") && (
             <div>
-              {/* Back Button & Horizontal Menu (Only if not searching) */}
               {searchQuery === "" && (
                 <div className="sticky top-[136px] z-30 bg-white border-b border-slate-200 shadow-sm flex items-center px-2">
                   <button onClick={() => setViewMode("categories")} className="p-3 text-primary">
@@ -324,7 +286,6 @@ export function MenuSection() {
                 </div>
               )}
 
-              {/* Products List Mobile */}
               <div className="p-4 space-y-6">
                  {searchQuery !== "" && (
                     <p className="text-xs font-bold uppercase text-slate-400 mb-2">Search Results for: {searchQuery}</p>
@@ -355,7 +316,6 @@ export function MenuSection() {
         {/* --- DESKTOP CONTENT AREA --- */}
         <main className="hidden md:block flex-1 p-4 md:p-10">
           <div className="max-w-5xl mx-auto">
-            {/* Desktop Search */}
             <div className="mb-8 relative max-w-md ml-auto">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                 <input 
@@ -367,7 +327,6 @@ export function MenuSection() {
                 />
             </div>
 
-            {/* Banner (Only if not searching) */}
             {searchQuery === "" && (
                 <div className="relative overflow-hidden bg-primary rounded-2xl p-8 md:p-12 mb-10 flex items-center min-h-[140px]">
                     <div className="absolute inset-0 z-0">
@@ -381,7 +340,6 @@ export function MenuSection() {
                 </div>
             )}
 
-            {/* Desktop Product Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredItems.length > 0 ? (
                 filteredItems.map((item) => (
