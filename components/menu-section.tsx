@@ -87,20 +87,12 @@ const menuCategories: MenuCategory[] = [
     ],
   },
   {
-    id: "rice-boxes",
-    title: "Rice Boxes",
-    subtitle: "Spicy Rice Meals",
+    id: "rice-salad-boxes",
+    title: "Rice & Salad Boxes",
+    subtitle: "Healthy Rice & Fresh Greens",
     bannerImage: "/images/deal-combo.jpg",
     items: [
       { id: 701, name: "Piri Rice Box", description: "Grilled chicken on spicy rice.", image: "/images/deal-combo.jpg", orderUrl: `${BASE_URL}#item-701` },
-    ],
-  },
-  {
-    id: "salad-boxes",
-    title: "Salad Boxes",
-    subtitle: "Fresh & Healthy Greens",
-    bannerImage: "/images/deal-combo.jpg",
-    items: [
       { id: 801, name: "Garden Salad Box", description: "Healthy mixed salad with grilled chicken.", image: "/images/deal-combo.jpg", orderUrl: `${BASE_URL}#item-801` },
     ],
   },
@@ -152,21 +144,13 @@ const menuCategories: MenuCategory[] = [
     ],
   },
   {
-    id: "awesome-shakes",
-    title: "Awesome Shakes",
-    subtitle: "Thick & Creamy Milkshakes",
+    id: "drinks-shakes",
+    title: "Drinks & Shakes",
+    subtitle: "Refreshing Beverages & Thick Shakes",
     bannerImage: "/images/shake.jpg",
     items: [
       { id: 1401, name: "Ferrero Rocher Shake", description: "Hazelnut chocolate shake.", image: "/images/shake.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-1401` },
       { id: 1402, name: "Oreo Cookie Shake", description: "Blended with real Oreos.", image: "/images/shake.jpg", orderUrl: `${BASE_URL}#item-1402` },
-    ],
-  },
-  {
-    id: "drinks",
-    title: "Drinks",
-    subtitle: "Refreshing Beverages",
-    bannerImage: "/images/deal-combo.jpg",
-    items: [
       { id: 1501, name: "Soft Drink Can", description: "330ml Chilled can.", image: "/images/deal-combo.jpg", orderUrl: `${BASE_URL}#item-1501` },
       { id: 1502, name: "Mineral Water", description: "500ml Bottled water.", image: "/images/deal-combo.jpg", orderUrl: `${BASE_URL}#item-1502` },
     ],
@@ -189,7 +173,7 @@ export function MenuSection() {
     setActiveCategory(category)
     setViewMode("products")
     setSearchQuery("")
-    if (window.innerWidth < 768) {
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
