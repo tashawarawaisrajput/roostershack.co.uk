@@ -4,49 +4,16 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* --- DEFAULT DARK MODE (NIGHT) --- */
-  --background: oklch(0.12 0.02 20); 
-  --foreground: oklch(0.98 0 0);    
+  /* --- DEFAULT LIGHT MODE --- */
+  --background: oklch(0.98 0.01 85);
+  --foreground: oklch(0.12 0.02 20);
 
-  --card: oklch(0.18 0.02 20);      
-  --card-foreground: oklch(0.98 0 0);
-  
-  --popover: oklch(0.18 0.02 20);
-  --popover-foreground: oklch(0.98 0 0);
-
-  /* Primary Brand Red */
-  --primary: oklch(0.60 0.25 25);   
-  --primary-foreground: oklch(0.98 0 0);
-
-  --secondary: oklch(0.25 0.02 20); 
-  --secondary-foreground: oklch(0.98 0 0);
-
-  --muted: oklch(0.25 0.02 20);
-  --muted-foreground: oklch(0.70 0.02 20); 
-
-  --accent: oklch(0.60 0.25 25);    
-  --accent-foreground: oklch(0.98 0 0);
-
-  --border: oklch(0.25 0.02 20);
-  --input: oklch(0.20 0.02 20);
-  --ring: oklch(0.60 0.25 25);
-
-  --radius: 1rem;
-}
-
-/* --- LIGHT MODE (DAY) FIX --- */
-/* .light class tabhi kaam karegi jab toggle button dabaya jaye */
-.light {
-  --background: oklch(0.98 0.01 85); /* Creamy White */
-  --foreground: oklch(0.12 0.02 20); /* Dark Grey Text */
-
-  --card: oklch(1 0 0);             /* Pure White Cards */
+  --card: oklch(1 0 0);
   --card-foreground: oklch(0.12 0.02 20);
   
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.12 0.02 20);
 
-  /* Light mode mein bhi red red hi rehna chahiye */
   --primary: oklch(0.60 0.25 25);   
   --primary-foreground: oklch(1 0 0);
 
@@ -61,6 +28,36 @@
 
   --border: oklch(0.90 0.02 85);
   --input: oklch(0.95 0.02 85);
+  --ring: oklch(0.60 0.25 25);
+
+  --radius: 1rem;
+}
+
+/* --- DARK MODE --- */
+.dark {
+  --background: oklch(0.12 0.02 20); 
+  --foreground: oklch(0.98 0 0);    
+
+  --card: oklch(0.18 0.02 20);      
+  --card-foreground: oklch(0.98 0 0);
+  
+  --popover: oklch(0.18 0.02 20);
+  --popover-foreground: oklch(0.98 0 0);
+
+  --primary: oklch(0.60 0.25 25);   
+  --primary-foreground: oklch(0.98 0 0);
+
+  --secondary: oklch(0.25 0.02 20); 
+  --secondary-foreground: oklch(0.98 0 0);
+
+  --muted: oklch(0.25 0.02 20);
+  --muted-foreground: oklch(0.70 0.02 20); 
+
+  --accent: oklch(0.60 0.25 25);    
+  --accent-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.25 0.02 20);
+  --input: oklch(0.20 0.02 20);
   --ring: oklch(0.60 0.25 25);
 }
 
@@ -92,7 +89,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    /* Force initial theme to avoid flash */
     background-color: var(--background);
     color: var(--foreground);
   }

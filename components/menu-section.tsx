@@ -24,7 +24,6 @@ interface MenuCategory {
   items: MenuItem[]
 }
 
-// Yahan aapka pura original data waisa hi hai
 const menuCategories: MenuCategory[] = [
   {
     id: "meal-deals",
@@ -189,11 +188,11 @@ export function MenuSection() {
   }
 
   return (
-    <section id="menu" className="bg-background min-h-screen pb-10 border-t border-white/5">
+    <section id="menu" className="bg-background min-h-screen pb-10 border-t border-border/10">
       <div className="flex flex-col md:flex-row max-w-[1440px] mx-auto">
         
         {/* --- DESKTOP SIDEBAR --- */}
-        <aside className="hidden md:block w-72 lg:w-80 bg-card border-r border-white/5 sticky top-20 h-[calc(100vh-80px)] overflow-y-auto z-20">
+        <aside className="hidden md:block w-72 lg:w-80 bg-card border-r border-border/10 sticky top-20 h-[calc(100vh-80px)] overflow-y-auto z-20">
           <div className="p-6">
             <h2 className="text-xl font-black uppercase text-foreground mb-6">Categories</h2>
             <nav className="space-y-1">
@@ -207,7 +206,7 @@ export function MenuSection() {
                   className={`w-full flex items-center justify-between px-5 py-4 rounded-xl transition-all font-bold uppercase text-xs tracking-wider ${
                     activeCategory.id === category.id && searchQuery === "" 
                     ? "bg-primary text-white shadow-lg translate-x-1" 
-                    : "text-muted-foreground hover:bg-white/5 hover:text-white"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                 >
                   <span>{category.title}</span>
@@ -220,7 +219,7 @@ export function MenuSection() {
 
         {/* --- MOBILE CONTENT AREA --- */}
         <div className="md:hidden w-full">
-          <div className="p-4 bg-card sticky top-[64px] z-30 border-b border-white/5 shadow-sm">
+          <div className="p-4 bg-card sticky top-[64px] z-30 border-b border-border/10 shadow-sm">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input 
@@ -231,7 +230,7 @@ export function MenuSection() {
                     setSearchQuery(e.target.value)
                     if (e.target.value !== "") setViewMode("products")
                 }}
-                className="w-full bg-background rounded-full py-3 pl-10 pr-4 text-xs font-bold border border-white/10 text-white focus:ring-1 focus:ring-primary outline-none"
+                className="w-full bg-background rounded-full py-3 pl-10 pr-4 text-xs font-bold border border-border/20 text-foreground focus:ring-1 focus:ring-primary outline-none"
               />
             </div>
           </div>
@@ -242,13 +241,13 @@ export function MenuSection() {
                 <button
                   key={category.id}
                   onClick={() => handleCategorySelect(category)}
-                  className="bg-card rounded-2xl shadow-sm border border-white/5 overflow-hidden"
+                  className="bg-card rounded-2xl shadow-sm border border-border/10 overflow-hidden"
                 >
                   <div className="relative aspect-square w-full">
                     <Image src={category.bannerImage} fill className="object-cover" alt={category.title} />
                   </div>
                   <div className="p-3 text-center">
-                    <span className="text-[10px] font-black uppercase tracking-tight text-white">{category.title}</span>
+                    <span className="text-[10px] font-black uppercase tracking-tight text-foreground">{category.title}</span>
                   </div>
                 </button>
               ))}
@@ -258,7 +257,7 @@ export function MenuSection() {
           {(viewMode === "products" || searchQuery !== "") && (
             <div>
               {searchQuery === "" && (
-                <div className="sticky top-[136px] z-30 bg-card border-b border-white/5 shadow-sm flex items-center px-2">
+                <div className="sticky top-[136px] z-30 bg-card border-b border-border/10 shadow-sm flex items-center px-2">
                   <button onClick={() => setViewMode("categories")} className="p-3 text-primary">
                     <ChevronLeft className="w-5 h-5" />
                   </button>
@@ -270,7 +269,7 @@ export function MenuSection() {
                         className={`whitespace-nowrap px-4 py-2 rounded-full font-bold uppercase text-[10px] transition-all ${
                           activeCategory.id === category.id 
                           ? "bg-primary text-white" 
-                          : "text-muted-foreground bg-white/5"
+                          : "text-muted-foreground bg-muted"
                         }`}
                       >
                         {category.title}
@@ -282,12 +281,13 @@ export function MenuSection() {
 
               <div className="p-4 space-y-6">
                  {filteredItems.map((item) => (
-                     <div key={item.id} className="bg-card rounded-2xl shadow-sm border border-white/5 flex flex-col overflow-hidden">
+                     <div key={item.id} className="bg-card rounded-2xl shadow-sm border border-border/10 flex flex-col overflow-hidden">
                         <div className="relative aspect-video w-full">
                           <Image src={item.image} fill className="object-cover" alt={item.name} />
                         </div>
                         <div className="p-4">
-                          <h4 className="text-lg font-black uppercase text-white mb-1">{item.name}</h4>
+                          {/* ✅ FIX: text-foreground */}
+                          <h4 className="text-lg font-black uppercase text-foreground mb-1">{item.name}</h4>
                           <p className="text-muted-foreground text-xs mb-4">{item.description}</p>
                           <Button asChild className="w-full bg-primary hover:opacity-90 text-white font-bold uppercase rounded-xl py-6">
                              <a href={item.orderUrl} target="_blank" rel="noopener noreferrer">Order Now</a>
@@ -310,7 +310,7 @@ export function MenuSection() {
                     placeholder="Search menu..." 
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full bg-card border border-white/5 text-white rounded-full py-3 pl-10 pr-4 text-xs font-bold outline-none focus:ring-2 focus:ring-primary/20"
+                    className="w-full bg-card border border-border/10 text-foreground rounded-full py-3 pl-10 pr-4 text-xs font-bold outline-none focus:ring-2 focus:ring-primary/20"
                 />
             </div>
 
@@ -329,13 +329,14 @@ export function MenuSection() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredItems.map((item) => (
-                  <div key={item.id} className="bg-card rounded-2xl shadow-sm hover:shadow-2xl hover:shadow-primary/10 transition-all border border-white/5 flex flex-col overflow-hidden group">
+                  <div key={item.id} className="bg-card rounded-2xl shadow-sm hover:shadow-2xl hover:shadow-primary/10 transition-all border border-border/10 flex flex-col overflow-hidden group">
                     <div className="relative aspect-[4/3] w-full">
                       <Image src={item.image} fill className="object-cover group-hover:scale-105 transition-all duration-500" alt={item.name} />
                       <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all" />
                     </div>
                     <div className="p-6 flex flex-col flex-grow text-center">
-                      <h4 className="text-lg font-black uppercase text-white mb-2 flex-grow flex items-center justify-center">{item.name}</h4>
+                      {/* ✅ FIX: text-foreground */}
+                      <h4 className="text-lg font-black uppercase text-foreground mb-2 flex-grow flex items-center justify-center">{item.name}</h4>
                       <p className="text-muted-foreground text-xs mb-6 line-clamp-2 italic">{item.description}</p>
                       <Button asChild className="w-full bg-primary hover:opacity-90 text-white font-bold uppercase rounded-xl py-6 mt-auto">
                         <a href={item.orderUrl} target="_blank" rel="noopener noreferrer">Order Now</a>

@@ -30,23 +30,20 @@ export function MenuCard({ name, description, image, isPopular }: MenuCardProps)
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        {/* Subtle Overlay to blend with card */}
         <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-transparent to-transparent opacity-80" />
       </div>
 
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow text-center">
-        {/* Fix: Direct utility for force-fixing light/dark text colors */}
-        <h3 className="text-lg font-black uppercase tracking-tighter mb-2 flex-grow flex items-center justify-center text-black dark:text-white">
+        {/* ✅ FIX: text-foreground */}
+        <h3 className="text-lg font-black uppercase tracking-tighter mb-2 flex-grow flex items-center justify-center text-foreground">
           {name}
         </h3>
-        
-        {/* Description: Force visible colors */}
-        <p className="text-xs text-gray-600 dark:text-gray-400 mb-6 line-clamp-2 italic leading-relaxed">
+        {/* ✅ FIX: text-muted-foreground */}
+        <p className="text-xs text-muted-foreground mb-6 line-clamp-2 italic leading-relaxed">
           {description}
         </p>
 
-        {/* Button: Static Red (Hamesha visible rahega) */}
         <Button
           asChild
           className="w-full bg-primary hover:bg-primary/90 text-white font-black uppercase text-[10px] tracking-widest py-6 rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-primary/20 mt-auto"
@@ -57,7 +54,6 @@ export function MenuCard({ name, description, image, isPopular }: MenuCardProps)
         </Button>
       </div>
 
-      {/* Hover Border Glow */}
       <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none border-2 border-primary/20" />
     </div>
   )
