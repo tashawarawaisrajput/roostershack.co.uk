@@ -5,6 +5,8 @@ import Link from "next/link"
 import Image from "next/image"
 import { Menu, X, MapPin, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { ModeToggle } from "@/components/mode-toggle.tsx" 
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -44,7 +46,6 @@ export function Header() {
     }
     window.addEventListener("scroll", handleScroll)
     
-    // Load selected branch from localStorage
     const savedBranch = localStorage.getItem("rooster-shack-branch")
     if (savedBranch) {
       setSelectedBranch(savedBranch)
@@ -72,7 +73,6 @@ export function Header() {
       <div className="container mx-auto px-4">
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center justify-between h-20">
-          {/* Left Nav Links */}
           <div className="flex items-center gap-8">
             <Link
               href="#menu"
@@ -81,7 +81,6 @@ export function Header() {
               Menu
             </Link>
             
-            {/* Locations Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger className="text-sm font-semibold uppercase tracking-wide text-foreground/80 hover:text-accent transition-colors flex items-center gap-1">
                 <MapPin className="w-4 h-4" />
@@ -106,7 +105,6 @@ export function Header() {
             </DropdownMenu>
           </div>
 
-          {/* Center Logo */}
           <Link href="/" className="absolute left-1/2 -translate-x-1/2">
             <Image
               src="/images/rooster-shack-logo.jpeg"
@@ -118,33 +116,33 @@ export function Header() {
             />
           </Link>
 
-          {/* Right CTA */}
-          <Button
-            asChild
-            className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold uppercase text-sm px-6 py-2 rounded-full transition-all duration-300 hover:scale-105"
-          >
-            <a href={ORDER_URL} target="_blank" rel="noopener noreferrer">
-              Order Now
-            </a>
-          </Button>
+          {/* 2. Right CTA + ModeToggle */}
+          <div className="flex items-center gap-4">
+            <ModeToggle /> {/* Desktop Switcher */}
+            <Button
+              asChild
+              className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold uppercase text-sm px-6 py-2 rounded-full transition-all duration-300 hover:scale-105"
+            >
+              <a href={ORDER_URL} target="_blank" rel="noopener noreferrer">
+                Order Now
+              </a>
+            </Button>
+          </div>
         </nav>
 
-        {/* Mobile Navigation - Hamburger | Logo | Order Now */}
+        {/* Mobile Navigation */}
         <nav className="md:hidden flex items-center justify-between h-16">
-          {/* Left - Hamburger Menu */}
-          <button
-            className="p-2 text-foreground"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              className="p-2 text-foreground"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+            <ModeToggle /> {/* 3. Mobile Switcher added here */}
+          </div>
 
-          {/* Center - Logo */}
           <Link href="/" className="absolute left-1/2 -translate-x-1/2">
             <Image
               src="/images/rooster-shack-logo.jpeg"
@@ -156,7 +154,6 @@ export function Header() {
             />
           </Link>
 
-          {/* Right - Order Now Button */}
           <Button
             asChild
             size="sm"
@@ -171,32 +168,24 @@ export function Header() {
         {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
           <div className="md:hidden bg-card/95 backdrop-blur-md border-t border-border py-4 animate-in slide-in-from-top duration-300">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 px-4">
               <Link
                 href="#menu"
-                className="text-sm font-semibold uppercase tracking-wide text-foreground/80 hover:text-accent transition-colors px-4 py-2"
+                className="text-sm font-semibold uppercase tracking-wide text-foreground/80 hover:text-accent py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Menu
               </Link>
               <Link
                 href="#locations"
-                className="text-sm font-semibold uppercase tracking-wide text-foreground/80 hover:text-accent transition-colors px-4 py-2 flex items-center gap-2"
+                className="text-sm font-semibold uppercase tracking-wide text-foreground/80 hover:text-accent py-2 flex items-center gap-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <MapPin className="w-4 h-4" />
                 Locations
               </Link>
-              <Link
-                href="/franchise"
-                className="text-sm font-semibold uppercase tracking-wide text-foreground/80 hover:text-accent transition-colors px-4 py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Franchise
-              </Link>
               
-              {/* Mobile Branch Selection */}
-              <div className="px-4 py-2 border-t border-border mt-2 pt-4">
+              <div className="border-t border-border mt-2 pt-4">
                 <p className="text-xs uppercase tracking-wide text-muted-foreground mb-2">Select Branch</p>
                 {branches.map((branch) => (
                   <button
@@ -206,11 +195,11 @@ export function Header() {
                       setIsMobileMenuOpen(false)
                     }}
                     className={cn(
-                      "w-full text-left py-2 px-2 rounded-lg transition-colors",
-                      selectedBranch === branch.id ? "bg-accent/10 text-accent" : "text-foreground/80 hover:bg-secondary"
+                      "w-full text-left py-2 px-2 rounded-lg mb-1",
+                      selectedBranch === branch.id ? "bg-accent/10 text-accent font-bold" : "text-foreground/80"
                     )}
                   >
-                    <span className="font-semibold text-sm">{branch.name}</span>
+                    {branch.name}
                   </button>
                 ))}
               </div>

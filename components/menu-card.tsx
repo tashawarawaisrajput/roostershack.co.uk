@@ -14,38 +14,42 @@ interface MenuCardProps {
 
 export function MenuCard({ name, description, image, isPopular }: MenuCardProps) {
   return (
-    <div className="group relative bg-card rounded-2xl overflow-hidden border border-border/50 transition-all duration-500 hover:border-primary/30 hover:shadow-xl">
+    <div className="group relative bg-card rounded-2xl overflow-hidden border border-border/50 transition-all duration-500 hover:border-primary/30 hover:shadow-2xl flex flex-col h-full">
       {/* Popular Badge */}
       {isPopular && (
-        <div className="absolute top-4 left-4 z-10 bg-accent text-accent-foreground text-xs font-bold uppercase tracking-wide px-3 py-1 rounded-full">
+        <div className="absolute top-4 left-4 z-10 bg-primary text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">
           Popular
         </div>
       )}
 
       {/* Image Container */}
-      <div className="relative h-48 md:h-56 overflow-hidden bg-gradient-to-b from-secondary to-background/50">
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
         <Image
           src={image}
           alt={name}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        {/* Glassmorphism overlay on hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-60" />
+        {/* Subtle Overlay to blend with card */}
+        <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-transparent to-transparent opacity-80" />
       </div>
 
       {/* Content */}
-      <div className="p-5">
-        <h3 className="text-lg font-bold uppercase tracking-wide text-foreground mb-2 line-clamp-1">
+      <div className="p-6 flex flex-col flex-grow text-center">
+        {/* Fix: Direct utility for force-fixing light/dark text colors */}
+        <h3 className="text-lg font-black uppercase tracking-tighter mb-2 flex-grow flex items-center justify-center text-black dark:text-white">
           {name}
         </h3>
-        <p className="text-sm text-muted-foreground mb-4 line-clamp-2 leading-relaxed">
+        
+        {/* Description: Force visible colors */}
+        <p className="text-xs text-gray-600 dark:text-gray-400 mb-6 line-clamp-2 italic leading-relaxed">
           {description}
         </p>
 
+        {/* Button: Static Red (Hamesha visible rahega) */}
         <Button
           asChild
-          className="w-full bg-accent hover:bg-primary text-accent-foreground font-bold uppercase text-sm px-4 py-2 rounded-full transition-all duration-300 hover:scale-105"
+          className="w-full bg-primary hover:bg-primary/90 text-white font-black uppercase text-[10px] tracking-widest py-6 rounded-xl transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-primary/20 mt-auto"
         >
           <a href={ORDER_URL} target="_blank" rel="noopener noreferrer">
             Order Now
@@ -53,10 +57,8 @@ export function MenuCard({ name, description, image, isPopular }: MenuCardProps)
         </Button>
       </div>
 
-      {/* Hover glow effect */}
-      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5" />
-      </div>
+      {/* Hover Border Glow */}
+      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none border-2 border-primary/20" />
     </div>
   )
 }
