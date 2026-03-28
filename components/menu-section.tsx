@@ -29,130 +29,139 @@ const menuCategories: MenuCategory[] = [
     id: "meal-deals",
     title: "Meal Deals",
     subtitle: "Value Bundles & Family Feasts",
-    bannerImage: "/images/deal-combo.jpg",
+    bannerImage: "/images/menu/overhead-group-1.jpg",
     items: [
-      { id: 101, name: "Rooster Meal Deal", description: "Any Classic Burger, Regular Fries & Drink.", image: "/images/deal-combo.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-101` },
-      { id: 102, name: "Family Feast", description: "4 Burgers, 2 Large Fries, 4 Drinks & 12 Wings.", image: "/images/deal-combo.jpg", orderUrl: `${BASE_URL}#item-102` },
+      { id: 101, name: "Family Bucket", description: "Southern fried chicken pieces, wings, fries and sides.", image: "/images/menu/southern-fried-family-bucket.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-101` },
+      { id: 102, name: "Mixed Platter", description: "A variety of grilled and fried chicken favorites.", image: "/images/menu/mixed-platter.jpg", orderUrl: `${BASE_URL}#item-102` },
+      { id: 103, name: "Variety Bucket", description: "A mix of wings, strips, and chicken pieces.", image: "/images/menu/variety-bucket-1.jpg", orderUrl: `${BASE_URL}#item-103` },
+      { id: 104, name: "Kids Nuggets Meal", description: "Crispy nuggets with fries and a drink.", image: "/images/menu/kids-nuggets-meal.jpg", orderUrl: `${BASE_URL}#item-104` },
     ],
   },
   {
     id: "piri-piri",
     title: "Piri Piri Chicken",
     subtitle: "Flame Grilled to Perfection",
-    bannerImage: "/images/hero-piri-piri.jpg",
+    bannerImage: "/images/menu/whole-chicken.jpg",
     items: [
-      { id: 201, name: "Quarter Piri Piri Chicken", description: "Grilled quarter chicken with signature spices.", image: "/images/hero-piri-piri.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-201` },
-      { id: 202, name: "Half Piri Piri Chicken", description: "Succulent half chicken grilled to order.", image: "/images/hero-piri-piri.jpg", orderUrl: `${BASE_URL}#item-201` },
-      { id: 203, name: "Whole Piri Piri Chicken", description: "Full chicken marinated for 24 hours.", image: "/images/hero-piri-piri.jpg", orderUrl: `${BASE_URL}#item-203` },
+      { id: 201, name: "Quarter Piri Piri Chicken", description: "Grilled quarter chicken with signature spices.", image: "/images/menu/quater-chicken.jpg", orderUrl: `${BASE_URL}#item-201` },
+      { id: 202, name: "Half Piri Piri Chicken", description: "Succulent half chicken grilled to order.", image: "/images/menu/half-chicken.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-202` },
+      { id: 203, name: "Whole Piri Piri Chicken", description: "Full chicken marinated for 24 hours.", image: "/images/menu/whole-chicken.jpg", orderUrl: `${BASE_URL}#item-203` },
+      { id: 204, name: "Piri Piri Wings", description: "Flame-grilled wings bursting with flavor.", image: "/images/menu/piri-piri-wings.jpg", orderUrl: `${BASE_URL}#item-204` },
     ],
   },
   {
     id: "famous-burgers",
     title: "Famous Burgers",
     subtitle: "Chicken, Beef & Infusion Burgers",
-    bannerImage: "/images/hero-burger.jpg",
+    bannerImage: "/images/menu/mexican-burger.jpg",
     items: [
-      { id: 301, name: "Double Cheese Burger", description: "Chicken fillet, lettuce & mayo.", image: "/images/double-cheese-burger.jpg", orderUrl: `${BASE_URL}#item-301` },
-      { id: 302, name: "Chicken Fillet Tower", description: "Chicken fillet, hash brown & cheese.", image: "/images/hero-burger.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-302` },
-      { id: 303, name: "The Smash Burger", description: "Double beef patty, double cheese & piri mayo.", image: "/images/shacks-smash-burger.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-303` },
-      { id: 304, name: "The Shack Burger", description: "100% Beef patty with shack sauce.", image: "/images/classic-burger.jpg", orderUrl: `${BASE_URL}#item-304` },
-      { id: 305, name: "The Punjabi Burger", description: "Flame grilled with Inferno hot chilli sauce.", image: "/images/spicy-burger.jpg", orderUrl: `${BASE_URL}#item-305` },
+      { id: 301, name: "Mexican Burger", description: "Spicy chicken fillet, salsa & jalapeños.", image: "/images/menu/mexican-burger.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-301` },
+      { id: 302, name: "The Smash Burger", description: "Double beef patty, double cheese & house sauce.", image: "/images/menu/smash.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-302` },
+      { id: 303, name: "Texan Burger", description: "Beef patty with BBQ sauce and onion rings.", image: "/images/menu/texan-burger.jpg", orderUrl: `${BASE_URL}#item-303` },
+      { id: 304, name: "Thai Burger", description: "Aromatic Thai flavors with a spicy twist.", image: "/images/menu/thai-burger.jpg", orderUrl: `${BASE_URL}#item-304` },
+      { id: 305, name: "Double Cheese Burger", description: "Two beef patties with melted cheese.", image: "/images/menu/double-cheese-burger.jpg", orderUrl: `${BASE_URL}#item-305` },
+      { id: 306, name: "Cod Burger", description: "Crispy fish fillet with tartar sauce.", image: "/images/menu/cod-burger-1.jpg", orderUrl: `${BASE_URL}#item-306` },
+      { id: 307, name: "Vegan Burger", description: "Plant-based patty with fresh salad.", image: "/images/menu/vegan-burger.jpg", orderUrl: `${BASE_URL}#item-307` },
+      { id: 308, name: "Infusion Burger", description: "Our special infusion grilled burger.", image: "/images/menu/infusion-burger.jpg", orderUrl: `${BASE_URL}#item-308` },
     ],
   },
   {
     id: "wraps",
     title: "Wraps",
-    subtitle: "Toasted Tortilla Selection",
-    bannerImage: "/images/hero-piri-piri.jpg",
+    subtitle: "Freshly Rolled Toasted Wraps",
+    bannerImage: "/images/menu/grilled-chicken-wrap.jpg",
     items: [
-      { id: 401, name: "Piri Chicken Wrap", description: "Grilled chicken with salad & mayo.", image: "/images/wraps.jpg", orderUrl: `${BASE_URL}#item-401` },
+      { id: 401, name: "Grilled Chicken Wrap", description: "Grilled chicken with salad & mayo.", image: "/images/menu/grilled-chicken-wrap.jpg", orderUrl: `${BASE_URL}#item-401` },
+      { id: 402, name: "Double Cheese Wrap", description: "Extra cheesy chicken wrap.", image: "/images/menu/double-cheese-wrap.jpg", orderUrl: `${BASE_URL}#item-402` },
     ],
   },
   {
     id: "pitta",
     title: "Pitta",
-    subtitle: "Freshly Toasted Pittas",
-    bannerImage: "/images/hero-piri-piri.jpg",
+    subtitle: "Soft Toasted Pitta Breads",
+    bannerImage: "/images/menu/whole-chicken.jpg",
     items: [
-      { id: 501, name: "Piri Chicken Pitta", description: "Grilled chicken in a soft pitta.", image: "/images/hero-piri-piri.jpg", orderUrl: `${BASE_URL}#item-501` },
+      { id: 501, name: "Piri Piri Pitta", description: "Flame-grilled chicken in a soft pitta.", image: "/images/menu/half-chicken.jpg", orderUrl: `${BASE_URL}#item-501` },
     ],
   },
   {
-    id: "quesadilla",
-    title: "Quesadilla",
-    subtitle: "Cheesy Grilled Tortillas",
-    bannerImage: "/images/hero-piri-piri.jpg",
+    id: "quesadillas",
+    title: "Quesadillas",
+    subtitle: "Cheesy Toasted Tortillas",
+    bannerImage: "/images/menu/chicken-quesadilla-1.jpg",
     items: [
-      { id: 601, name: "Shack Chicken Quesadilla", description: "Grilled chicken, cheese & salsa.", image: "/images/hero-piri-piri.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-601` },
+      { id: 601, name: "Chicken Quesadilla", description: "Grilled chicken, cheese & salsa in a tortilla.", image: "/images/menu/chicken-quesadilla-1.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-601` },
+      { id: 602, name: "Lamb Quesadilla", description: "Succulent lamb with melted cheese.", image: "/images/menu/lamb-quesadilla.jpg", orderUrl: `${BASE_URL}#item-602` },
     ],
   },
   {
-    id: "rice-salad-boxes",
-    title: "Rice & Salad Boxes",
-    subtitle: "Healthy Rice & Fresh Greens",
-    bannerImage: "/images/deal-combo.jpg",
+    id: "rice-boxes",
+    title: "Rice Boxes",
+    subtitle: "Seasoned Rice with Grilled Toppings",
+    bannerImage: "/images/menu/chicken-rice-box.jpg",
     items: [
-      { id: 701, name: "Piri Rice Box", description: "Grilled chicken on spicy rice.", image: "/images/deal-combo.jpg", orderUrl: `${BASE_URL}#item-701` },
-      { id: 801, name: "Garden Salad Box", description: "Healthy mixed salad with grilled chicken.", image: "/images/deal-combo.jpg", orderUrl: `${BASE_URL}#item-801` },
+      { id: 701, name: "Chicken Rice Box", description: "Grilled chicken on spicy rice.", image: "/images/menu/chicken-rice-box.jpg", orderUrl: `${BASE_URL}#item-701` },
+      { id: 702, name: "Paneer Rice Box", description: "Grilled paneer on seasoned rice.", image: "/images/menu/paneer-rice-box.jpg", orderUrl: `${BASE_URL}#item-702` },
     ],
   },
   {
-    id: "southern-fried",
-    title: "Southern Fried Chicken",
-    subtitle: "Classic Crispy Pieces",
-    bannerImage: "/images/wings.jpg",
+    id: "salad-boxes",
+    title: "Salad Boxes",
+    subtitle: "Fresh & Healthy Garden Salads",
+    bannerImage: "/images/menu/piri-chicken-salad-box.jpg",
     items: [
-      { id: 901, name: "2pc Chicken Piece", description: "Classic crispy fried chicken.", image: "/images/wings.jpg", orderUrl: `${BASE_URL}#item-901` },
+      { id: 801, name: "Piri Chicken Salad Box", description: "Healthy mixed salad with grilled chicken.", image: "/images/menu/piri-chicken-salad-box.jpg", orderUrl: `${BASE_URL}#item-801` },
+    ],
+  },
+  {
+    id: "fried-chicken",
+    title: "Fried Chicken",
+    subtitle: "Crispy Southern Style Chicken",
+    bannerImage: "/images/menu/southern-fried-family-bucket.jpg",
+    items: [
+      { id: 901, name: "Fried Chicken Piece", description: "Classic crispy southern fried chicken.", image: "/images/menu/southern-fried-family-bucket.jpg", orderUrl: `${BASE_URL}#item-901` },
     ],
   },
   {
     id: "fried-wings-strips",
     title: "Wings & Strips (Fried)",
     subtitle: "Crispy & Spicy Fried Chicken",
-    bannerImage: "/images/wings-2.jpg",
+    bannerImage: "/images/menu/wicked-wings.jpg",
     items: [
-      { id: 1001, name: "6 Spicy Fried Wings", description: "Golden fried spicy wings.", image: "/images/wings-1.jpg", orderUrl: `${BASE_URL}#item-1001` },
-      { id: 1002, name: "10 Spicy Fried Wings", description: "Larger portion of golden fried spicy wings.", image: "/images/wings-2.jpg", orderUrl: `${BASE_URL}#item-1002` }
+      { id: 1001, name: "Wicked Wings", description: "Our famous spicy fried wings.", image: "/images/menu/wicked-wings.jpg", orderUrl: `${BASE_URL}#item-1001` },
+      { id: 1002, name: "Chicken Strips", description: "Golden crispy chicken strips.", image: "/images/menu/strips.jpg", orderUrl: `${BASE_URL}#item-1002` },
+      { id: 1003, name: "Southern Fried Wings", description: "Classic crispy fried wings.", image: "/images/menu/southern-fried-wings.jpg", orderUrl: `${BASE_URL}#item-1003` }
     ]
   },
   {
     id: "sides",
     title: "Sides",
-    subtitle: "Tasty Accompaniments",
-    bannerImage: "/images/deal-combo.jpg",
+    subtitle: "Perfect Accompaniments",
+    bannerImage: "/images/menu/mozzarella-sticks.jpg",
     items: [
-      { id: 1101, name: "Regular Fries", description: "Salted potato fries.", image: "/images/deal-combo.jpg", orderUrl: `${BASE_URL}#item-1101` },
-      { id: 1102, name: "Piri Piri Fries", description: "Fries with piri piri salt.", image: "/images/deal-combo.jpg", orderUrl: `${BASE_URL}#item-1102` },
-    ],
-  },
-  {
-    id: "loaded-fries",
-    title: "Loaded Fries",
-    subtitle: "Topped with Indulgence",
-    bannerImage: "/images/hero-burger.jpg",
-    items: [
-      { id: 1201, name: "Chicken Loaded Fries", description: "Fries with cheese & grilled chicken.", image: "/images/hero-burger.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-1201` },
+      { id: 1101, name: "Mozzarella Sticks", description: "Gooey melted cheese sticks.", image: "/images/menu/mozzarella-sticks.jpg", orderUrl: `${BASE_URL}#item-1101` },
+      { id: 1102, name: "Regular Fries", description: "Crispy golden potato fries.", image: "/images/menu/mixed-platter.jpg", orderUrl: `${BASE_URL}#item-1102` },
     ],
   },
   {
     id: "dips",
     title: "Dips",
-    subtitle: "House Made Sauces",
-    bannerImage: "/images/deal-combo.jpg",
+    subtitle: "Extra Flavor for Your Meal",
+    bannerImage: "/images/menu/dip-1.jpg",
     items: [
-      { id: 1301, name: "Piri Mayo Dip", description: "Creamy piri mayo.", image: "/images/sauces.jpg", orderUrl: `${BASE_URL}#item-1301` },
+      { id: 1301, name: "Garlic Mayo", description: "Creamy garlic mayo.", image: "/images/menu/dip-1.jpg", orderUrl: `${BASE_URL}#item-1301` },
+      { id: 1302, name: "Piri Mayo", description: "Zesty piri piri flavored mayo.", image: "/images/menu/dip-2.jpg", orderUrl: `${BASE_URL}#item-1302` },
+      { id: 1303, name: "BBQ Dip", description: "Smoky and sweet BBQ sauce.", image: "/images/menu/dip-3.jpg", orderUrl: `${BASE_URL}#item-1303` },
+      { id: 1304, name: "Sweet Chilli", description: "Zesty sweet and spicy dip.", image: "/images/menu/dip-4.jpg", orderUrl: `${BASE_URL}#item-1304` },
     ],
   },
   {
     id: "drinks-shakes",
     title: "Drinks & Shakes",
-    subtitle: "Refreshing Beverages & Thick Shakes",
-    bannerImage: "/images/shake.jpg",
+    subtitle: "Refreshing Beverages",
+    bannerImage: "/images/menu/milk-shakes.jpg",
     items: [
-      { id: 1401, name: "Ferrero Rocher Shake", description: "Hazelnut chocolate shake.", image: "/images/shake.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-1401` },
-      { id: 1402, name: "Oreo Cookie Shake", description: "Blended with real Oreos.", image: "/images/shake.jpg", orderUrl: `${BASE_URL}#item-1402` },
-      { id: 1501, name: "Soft Drink Can", description: "330ml Chilled can.", image: "/images/deal-combo.jpg", orderUrl: `${BASE_URL}#item-1501` },
-      { id: 1502, name: "Mineral Water", description: "500ml Bottled water.", image: "/images/deal-combo.jpg", orderUrl: `${BASE_URL}#item-1502` },
+      { id: 1401, name: "Milk Shakes", description: "Thick and creamy milkshakes.", image: "/images/menu/milk-shakes.jpg", isPopular: true, orderUrl: `${BASE_URL}#item-1401` },
     ],
   },
 ]
@@ -271,27 +280,20 @@ export function MenuSection() {
               )}
 
               <div className="p-4 space-y-6">
-                 {searchQuery !== "" && (
-                    <p className="text-xs font-bold uppercase text-slate-400 mb-2">Search Results for: {searchQuery}</p>
-                 )}
-                 {filteredItems.length > 0 ? (
-                    filteredItems.map((item) => (
-                        <div key={item.id} className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col overflow-hidden">
-                           <div className="relative aspect-video w-full">
-                             <Image src={item.image} fill className="object-cover" alt={item.name} />
-                           </div>
-                           <div className="p-4">
-                             <h4 className="text-lg font-black uppercase text-foreground mb-1">{item.name}</h4>
-                             <p className="text-muted-foreground text-xs mb-4">{item.description}</p>
-                             <Button asChild className="w-full bg-accent hover:bg-primary text-white font-bold uppercase rounded-xl py-6">
-                                <a href={item.orderUrl} target="_blank" rel="noopener noreferrer">Order Now</a>
-                             </Button>
-                           </div>
+                 {filteredItems.map((item) => (
+                     <div key={item.id} className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col overflow-hidden">
+                        <div className="relative aspect-video w-full">
+                          <Image src={item.image} fill className="object-cover" alt={item.name} />
                         </div>
-                    ))
-                 ) : (
-                    <div className="text-center py-20 text-slate-400 text-sm font-bold">No items found.</div>
-                 )}
+                        <div className="p-4">
+                          <h4 className="text-lg font-black uppercase text-foreground mb-1">{item.name}</h4>
+                          <p className="text-muted-foreground text-xs mb-4">{item.description}</p>
+                          <Button asChild className="w-full bg-accent hover:bg-primary text-white font-bold uppercase rounded-xl py-6">
+                             <a href={item.orderUrl} target="_blank" rel="noopener noreferrer">Order Now</a>
+                          </Button>
+                        </div>
+                     </div>
+                 ))}
               </div>
             </div>
           )}
@@ -325,24 +327,20 @@ export function MenuSection() {
             )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredItems.length > 0 ? (
-                filteredItems.map((item) => (
-                    <div key={item.id} className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 flex flex-col overflow-hidden group">
-                      <div className="relative aspect-[4/3] w-full">
-                        <Image src={item.image} fill className="object-cover group-hover:scale-105 transition-all duration-500" alt={item.name} />
-                      </div>
-                      <div className="p-6 flex flex-col flex-grow text-center">
-                        <h4 className="text-lg font-black uppercase text-foreground mb-2 flex-grow flex items-center justify-center">{item.name}</h4>
-                        <p className="text-muted-foreground text-xs mb-6 line-clamp-2">{item.description}</p>
-                        <Button asChild className="w-full bg-accent hover:bg-primary text-white font-bold uppercase rounded-xl py-6 mt-auto">
-                          <a href={item.orderUrl} target="_blank" rel="noopener noreferrer">Order Now</a>
-                        </Button>
-                      </div>
+              {filteredItems.map((item) => (
+                  <div key={item.id} className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 flex flex-col overflow-hidden group">
+                    <div className="relative aspect-[4/3] w-full">
+                      <Image src={item.image} fill className="object-cover group-hover:scale-105 transition-all duration-500" alt={item.name} />
                     </div>
-                ))
-              ) : (
-                <div className="col-span-full text-center py-20 text-slate-400">No items matching your search.</div>
-              )}
+                    <div className="p-6 flex flex-col flex-grow text-center">
+                      <h4 className="text-lg font-black uppercase text-foreground mb-2 flex-grow flex items-center justify-center">{item.name}</h4>
+                      <p className="text-muted-foreground text-xs mb-6 line-clamp-2">{item.description}</p>
+                      <Button asChild className="w-full bg-accent hover:bg-primary text-white font-bold uppercase rounded-xl py-6 mt-auto">
+                        <a href={item.orderUrl} target="_blank" rel="noopener noreferrer">Order Now</a>
+                      </Button>
+                    </div>
+                  </div>
+              ))}
             </div>
           </div>
         </main>
